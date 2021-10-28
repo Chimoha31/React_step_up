@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import ChildArea from './components/ChildArea';
 import './App.css';
 
 const App = () => {
+  console.log("App");
 // State
   const [text, setText] = useState("");
 
@@ -10,14 +11,11 @@ const App = () => {
 
 
 // 関数
-const onChangeText = (event) => {
-  return setText(event.target.value);
-}
+const onChangeText = (event) => setText(event.target.value);
 
-const onClickOpen = () => {
-  return setOpen(!open);
-}
+const onClickOpen = () => setOpen(!open);
 
+const onClickClose = useCallback(() => setOpen(false), [setOpen]);
 
 
   return(
@@ -26,8 +24,12 @@ const onClickOpen = () => {
       <br />
       <br />
       <button onClick={onClickOpen}>表示</button>
+
+      {/* ChildArea Components */}
       <ChildArea
-        open={open}/>
+        open={open}
+        onClickClose={onClickClose}
+        />
     </div>
   )
 }

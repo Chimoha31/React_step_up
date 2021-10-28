@@ -1,15 +1,22 @@
-import React from "react";
-import '../components/ChildArea.css';
+import React, {useState} from "react";
+import "../components/ChildArea.css";
+import { memo } from "react";
 
-const ChildArea = (props) => {
-  const { open } = props;
+const ChildArea = memo((props) => {
+  console.log("ChildAreaがレンダリングされた");
+  const { open, onClickClose } = props;
+
+
   return (
     <>
-    {open ? ( <div className="entire">
-        <p>子コンポーネント</p>
-      </div>): null}
+      {open ? (
+        <div className="entire">
+          <p>子コンポーネント</p>
+          <button onClick={onClickClose}>閉じる</button>
+        </div>
+      ) : null}
     </>
   );
-};
+});
 
 export default ChildArea;
